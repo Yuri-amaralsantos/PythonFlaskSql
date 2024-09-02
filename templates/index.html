@@ -9,7 +9,8 @@
     <ul>
         {% for article in articles %}
         <li>
-            {{ article.title }} {{article.content}} - 
+            {{ article.title }} - 
+            <a href="/view/{{ article.id }}">View</a>
             <a href="/edit/{{ article.id }}">Edit</a> | 
             <a href="/delete/{{ article.id }}">Delete</a>
         </li>

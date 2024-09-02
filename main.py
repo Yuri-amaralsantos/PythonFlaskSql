@@ -23,6 +23,14 @@ def index():
     conn.close()
     return render_template('index.html', articles=articles)
 
+@app.route('/view/<int:article_id>', methods=['GET'])
+def view_article(article_id):
+    conn = get_db_connection()
+    article = conn.execute('SELECT * FROM articles WHERE id = ?', (article_id,)).fetchone()
+    conn.close()
+    return render_template('view.html', article=article)
+    
+
 @app.route('/add', methods=['GET', 'POST'])
 def add_article():
     if request.method == 'POST':
@@ -36,6 +44,7 @@ def add_article():
         
         return redirect(url_for('index'))
     return render_template('add.html')
+  
 
 @app.route('/edit/<int:article_id>', methods=['GET', 'POST'])
 def edit_article(article_id):
